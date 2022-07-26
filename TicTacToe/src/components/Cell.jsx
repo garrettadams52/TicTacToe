@@ -1,20 +1,23 @@
 import {useState} from 'react'
 
 function Cell(props){
-    const [cellStatus, setCellStatus] = useState('')
+    const [cellStatus, setCellStatus] = useState('H')
 
     function updateStatus(){
-        if(cellStatus!=''){
+        if(cellStatus!='H'){
             return alert("Invalid Move")
         }
         const gameState = props.getGameState()
-        props.clickFunction()
-        return setCellStatus(gameState)
+        props.clickFunction(props.ind)
+        return setCellStatus(
+            gameState === 1 ? 'X' : 'O'
+        )
     }
+
 
     return(
         <div>
-            <button onClick={updateStatus}>State: {cellStatus}</button>
+            <button onClick={updateStatus}>{cellStatus}</button>
         </div>
     )
 
